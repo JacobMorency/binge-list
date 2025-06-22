@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AuthProvider } from "@/app/context/authcontext";
 
 export const metadata: Metadata = {
   title: "BingeList",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-base-100">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
