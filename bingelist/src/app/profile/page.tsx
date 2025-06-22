@@ -1,10 +1,10 @@
 import ClientLayout from "@/app/components/clientlayout";
 
-export default function DashboardPage() {
+export default function ProfilePage() {
   return (
-    <ClientLayout header="BingeList">
+    <ClientLayout header="Profile">
       <main className="flex flex-col items-center justify-center flex-1 p-4">
-        <p className="text-primary-content">Welcome to your dashboard!</p>
+        <p className="text-primary-content">Welcome to your profile!</p>
       </main>
     </ClientLayout>
   );
