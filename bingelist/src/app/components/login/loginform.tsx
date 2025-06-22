@@ -16,9 +16,6 @@ export default function LoginForm() {
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("LoginForm: handleLogin called");
-    console.log("Email:", email);
-    console.log("Password:", password);
     e.preventDefault();
 
     setEmailEmpty(false);
@@ -47,9 +44,6 @@ export default function LoginForm() {
         email,
         password,
       });
-
-      console.log("Supabase login data:", data);
-      console.log("Supabase login error:", error);
 
       if (error) {
         setError(error.message);
