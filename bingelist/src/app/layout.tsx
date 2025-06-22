@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AuthProvider } from "@/app/context/authContext";
+import { AuthProvider } from "@/app/context/authcontext";
 
 export const metadata: Metadata = {
   title: "BingeList",
