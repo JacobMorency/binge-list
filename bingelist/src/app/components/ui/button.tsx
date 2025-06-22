@@ -7,7 +7,8 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
 };
 
-const baseStyles = "text-primary-content font-bold py-2 px-4 rounded";
+const baseStyles =
+  "text-primary-content font-bold py-2 px-4 rounded shadow-md shadow-inner";
 
 const variants = {
   primary: "bg-primary",
