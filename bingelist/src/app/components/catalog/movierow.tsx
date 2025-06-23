@@ -16,7 +16,7 @@ export default function MovieRow({ header, movies }: MovieRowProps) {
   }, [movies]);
 
   return (
-    <div>
+    <div className="my-4">
       <h2 className="font-bold text-2xl">{header}</h2>
       <div className="flex overflow-x-auto space-x-2 py-2">
         {moviesList.map((movie) => (

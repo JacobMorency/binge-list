@@ -17,7 +17,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
     <div className="shrink-0 w-40">
       <Image
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        alt={movie.title}
+        alt={movie.title || "Movie Poster"}
         width={500}
         height={750}
         className="rounded-md"
