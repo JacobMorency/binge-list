@@ -1,0 +1,28 @@
+"use client";
+import MovieCard from "@/app/components/catalog/moviecard";
+import type { MovieResult } from "@/types/movie";
+import { useEffect, useState } from "react";
+
+type MovieRowProps = {
+  header: string;
+  movies: MovieResult[];
+};
+
+export default function MovieRow({ header, movies }: MovieRowProps) {
+  const [moviesList, setMoviesList] = useState<MovieResult[]>([]);
+
+  useEffect(() => {
+    setMoviesList(movies);
+  }, [movies]);
+
+  return (
+    <div>
+      <h2 className="font-bold text-2xl">{header}</h2>
+      <div className="flex overflow-x-auto space-x-4 py-4">
+        {moviesList.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+    </div>
+  );
+}

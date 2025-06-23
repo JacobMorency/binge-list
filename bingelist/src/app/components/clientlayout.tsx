@@ -20,7 +20,9 @@ const ClientLayout = ({ children, header }: ClientLayoutProps) => {
         </header>
       )}
 
-      <div className="flex flex-1 flex-col px-3">{children}</div>
+      <div className="flex flex-1 flex-col px-3 text-primary-content">
+        {children}
+      </div>
       {user && <BottomNav />}
     </div>
   );

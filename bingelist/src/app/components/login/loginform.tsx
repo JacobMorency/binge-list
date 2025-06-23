@@ -63,7 +63,7 @@ export default function LoginForm() {
 
   return (
     <div className="w-full p-4">
-      <h2 className="text-primary-content text-2xl mb-4">Login</h2>
+      <h2 className="text-2xl mb-4">Login</h2>
       {error && (
         <div className="alert alert-error mb-4">
           <span>{error}</span>
@@ -71,15 +71,13 @@ export default function LoginForm() {
       )}
       <form action="" onSubmit={handleLogin}>
         <div className="form-group flex flex-col mb-4 space-y-2">
-          <label htmlFor="email" className="text-primary-content">
-            Email
-          </label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
             name="email"
             placeholder="Enter your email"
-            className="form-control p-2 rounded text-primary-content bg-base-300 border border-neutral-600 focus:border-primary focus:outline-none"
+            className="form-control p-2 rounded bg-base-300 border border-neutral-600 focus:border-primary focus:outline-none"
             required
             onChange={(e) => {
               setEmail(e.target.value);
@@ -88,15 +86,13 @@ export default function LoginForm() {
           />
         </div>
         <div className="form-group flex flex-col mb-4 space-y-2">
-          <label htmlFor="password" className="text-primary-content">
-            Password
-          </label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
             placeholder="Enter your password"
-            className="form-control p-2 rounded text-primary-content bg-base-300 border border-neutral-600 focus:border-primary focus:outline-none"
+            className="form-control p-2 rounded bg-base-300 border border-neutral-600 focus:border-primary focus:outline-none"
             required
             onChange={(e) => {
               setPassword(e.target.value);
