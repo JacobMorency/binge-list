@@ -1,6 +1,6 @@
 import ClientLayout from "@/app/components/clientlayout";
 import { fetchTMDB } from "@/lib/tmdb";
-import Input from "@/app/components/ui/input";
+import SearchInput from "@/app/components/catalog/searchinput";
 import MovieRow from "@/app/components/catalog/movierow";
 
 export default async function CatalogPage() {
@@ -13,7 +13,7 @@ export default async function CatalogPage() {
     <ClientLayout header="Catalog">
       <div className="pb-24">
         <div className="my-4">
-          <Input type="text" placeholder="Search..." className="w-full" />
+          <SearchInput />
         </div>
         <main>
           <MovieRow
