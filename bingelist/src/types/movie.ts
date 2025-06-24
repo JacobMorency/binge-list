@@ -3,6 +3,13 @@ export type Movie = {
   results: MovieResult[];
 };
 
+export type SupabaseMovie = {
+  movie_id: number;
+  title: string;
+  poster_path?: string;
+  release_date?: string;
+};
+
 export type MovieResult = {
   adult: boolean;
   backdrop_path: string;
