@@ -23,7 +23,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
       return;
     }
     try {
-      const { data, error } = await supabase.from("watched_movies").insert([
+      const { data, error } = await supabase.from("movies_to_watch").insert([
         {
           user_id: user.id,
           movie_id: movie.id,
@@ -47,7 +47,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
       return;
     }
     try {
-      const { data, error } = await supabase.from("movies_to_watch").insert([
+      const { data, error } = await supabase.from("watched_movies").insert([
         {
           user_id: user.id,
           movie_id: movie.id,

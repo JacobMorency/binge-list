@@ -10,11 +10,15 @@ import {
   IoHeartOutline,
   IoTimeOutline,
 } from "react-icons/io5";
+import Loading from "@/app/components/ui/loading";
 
 export default function WatchListTabs() {
   const [selectedTab, setSelectedTab] = useState<string>("movies_to_watch");
   const [selectedMovies, setSelectedMovies] = useState<SupabaseMovie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [moviesToWatchCount, setMoviesToWatchCount] = useState<number>(0);
+  const [watchedMoviesCount, setWatchedMoviesCount] = useState<number>(0);
+  const [favoriteMoviesCount, setFavoriteMoviesCount] = useState<number>(0);
 
   const { user } = useAuth();
 
@@ -79,6 +83,28 @@ export default function WatchListTabs() {
     } else if (selectedTab === "favorite_movies") {
       fetchFavoritesMovies();
     }
+
+    const fetchCounts = async () => {
+      if (!user) return;
+      const { count: toWatchCount } = await supabase
+        .from("movies_to_watch")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", user.id);
+      setMoviesToWatchCount(toWatchCount || 0);
+
+      const { count: watchedCount } = await supabase
+        .from("watched_movies")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", user.id);
+      setWatchedMoviesCount(watchedCount || 0);
+
+      const { count: favoriteCount } = await supabase
+        .from("favorite_movies")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", user.id);
+      setFavoriteMoviesCount(favoriteCount || 0);
+    };
+    fetchCounts();
   }, [user, selectedTab]);
 
   const tabStyle = (tab: string) => {
@@ -94,21 +120,21 @@ export default function WatchListTabs() {
           className={`flex-1 rounded-l-md ${tabStyle("movies_to_watch")}`}
           onClick={() => setSelectedTab("movies_to_watch")}
         >
-          To Watch (0)
+          To Watch ({moviesToWatchCount})
         </button>
         <button
           role="tab"
           className={`flex-1 ${tabStyle("watched_movies")}`}
           onClick={() => setSelectedTab("watched_movies")}
         >
-          Watched (0)
+          Watched ({watchedMoviesCount})
         </button>
         <button
           role="tab"
           className={`flex-1 rounded-r-md ${tabStyle("favorite_movies")}`}
           onClick={() => setSelectedTab("favorite_movies")}
         >
-          Favorites (0)
+          Favorites ({favoriteMoviesCount})
         </button>
       </nav>
       <div>
@@ -146,15 +172,23 @@ export default function WatchListTabs() {
               <ul className="flex flex-col gap-2">
                 {selectedMovies.map((movie) => (
                   <li key={movie.movie_id} className="bg-bg-light rounded-md">
-                    <MovieCard movie={movie} selectedTab={selectedTab} />
+                    <MovieCard
+                      movie={movie}
+                      selectedTab={selectedTab}
+                      onRemove={() =>
+                        setSelectedMovies((prev) =>
+                          prev.filter((m) => m.movie_id !== movie.movie_id)
+                        )
+                      }
+                    />
                   </li>
                 ))}
               </ul>
             )}
           </>
         ) : (
-          <div className="text-center">
-            <p className="text-lg">Loading...</p>
+          <div className="flex items-center justify-center h-64">
+            <Loading />
           </div>
         )}
       </div>

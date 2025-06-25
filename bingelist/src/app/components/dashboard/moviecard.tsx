@@ -10,9 +10,14 @@ import { MovieDetails } from "@/types/movie";
 type MovieCardProps = {
   movie: SupabaseMovie;
   selectedTab: string;
+  onRemove: () => void;
 };
 
-export default function MovieCard({ movie, selectedTab }: MovieCardProps) {
+export default function MovieCard({
+  movie,
+  selectedTab,
+  onRemove,
+}: MovieCardProps) {
   const { user } = useAuth();
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
 
@@ -52,6 +57,7 @@ export default function MovieCard({ movie, selectedTab }: MovieCardProps) {
         console.error(`Error removing movie from ${selectedTab}:`, error);
       } else {
         console.log(`Movie removed from ${selectedTab}:`, data);
+        onRemove();
       }
     } catch (error) {
       console.error(`Error removing movie from ${selectedTab}:`, error);
