@@ -20,6 +20,7 @@ export type MediaResult = {
   poster_path: string | null;
   overview: string;
   vote_average: number;
+  genres: { id: number; name: string }[];
 } & (
   | {
       media_type: "movie";

@@ -5,7 +5,8 @@ import supabase from "@/app/lib/supabaseClient";
 import { useAuth } from "@/app/context/authContext";
 import { IoClose, IoStar } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { MovieDetails } from "@/types/movie";
+import { MediaResult } from "@/types/movie";
+import Loading from "@/app/components/ui/loading";
 
 type MovieCardProps = {
   movie: SupabaseMovie;
@@ -19,7 +20,7 @@ export default function MovieCard({
   onRemove,
 }: MovieCardProps) {
   const { user } = useAuth();
-  const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
+  const [movieDetails, setMovieDetails] = useState<MediaResult | null>(null);
   const [mediaType, setMediaType] = useState<string>("");
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function MovieCard({
         console.error("Failed to fetch movie details:", res.statusText);
         return;
       }
-      const data: MovieDetails = await res.json();
+      const data: MediaResult = await res.json();
       if (!data) {
         console.error("No movie details found for ID:", movie.movie_id);
         return;
@@ -70,6 +71,10 @@ export default function MovieCard({
     }
   };
 
+  if (!movieDetails) {
+    return <Loading />;
+  }
+
   return (
     <div className="bg-base-100 shadow-xl flex p-4 gap-2 rounded-md relative">
       <Image
@@ -85,14 +90,14 @@ export default function MovieCard({
       <div>
         <h2 className="text-md font-bold">{movie.title}</h2>
         <p className="text-text-muted">
-          {movieDetails?.release_date?.split("-")[0]} -{" "}
-          {movieDetails?.genres
+          {movie.release_date?.slice(0, 4)} •{" "}
+          {movieDetails.genres
             .slice(0, 2)
             .map((genre) => genre.name)
             .join(", ")}
         </p>
         <p className="flex items-center gap-1 text-sm">
-          <IoStar fill="gold" /> {movieDetails?.vote_average.toFixed(2)}
+          <IoStar fill="gold" /> {movieDetails.vote_average.toFixed(2)}
         </p>
         <Button className="mt-3 flex items-center gap-2" onClick={removeMovie}>
           <IoClose size={18} />
