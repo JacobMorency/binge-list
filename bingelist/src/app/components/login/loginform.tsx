@@ -1,8 +1,7 @@
 "use client";
 
-import { User, Session } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "@/app/components/ui/button";
 import supabase from "@/app/lib/supabaseClient";
 
@@ -84,6 +83,9 @@ export default function LoginForm() {
               setEmailEmpty(e.target.value.trim() === "");
             }}
           />
+          {emailEmpty && (
+            <span className="text-danger text-sm">Email cannot be empty</span>
+          )}
         </div>
         <div className="form-group flex flex-col mb-4 space-y-2">
           <label htmlFor="password">Password</label>
@@ -99,6 +101,11 @@ export default function LoginForm() {
               setPasswordEmpty(e.target.value.trim() === "");
             }}
           />
+          {passwordEmpty && (
+            <span className="text-danger text-sm">
+              Password cannot be empty
+            </span>
+          )}
           <a href="#" className="text-primary text-sm">
             Forgot password?
           </a>

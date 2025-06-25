@@ -1,7 +1,4 @@
-import { House } from "lucide-react";
 import {
-  IoHomeOutline,
-  IoHome,
   IoPerson,
   IoPersonOutline,
   IoSearch,

@@ -1,7 +1,7 @@
 import { MediaResult } from "@/types/movie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { IoAdd, IoTimeOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
+import { IoAdd, IoTimeOutline, IoHeartOutline } from "react-icons/io5";
 import supabase from "@/app/lib/supabaseClient";
 import { useAuth } from "@/app/context/authContext";
 
