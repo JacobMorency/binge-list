@@ -20,11 +20,12 @@ export default function MovieCard({
 }: MovieCardProps) {
   const { user } = useAuth();
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
+  const [mediaType, setMediaType] = useState<string>("");
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       const res = await fetch(
-        `/api/tmdb/moviedetails?movieId=${movie.movie_id}`
+        `/api/tmdb/moviedetails?movieId=${movie.movie_id}&mediaType=${movie.media_type}`
       );
       if (!res.ok) {
         console.error("Failed to fetch movie details:", res.statusText);
@@ -40,7 +41,12 @@ export default function MovieCard({
     };
 
     fetchMovieDetails();
-  }, [movie.movie_id]);
+    if (movie.media_type === "tv") {
+      setMediaType("TV");
+    } else if (movie.media_type === "movie") {
+      setMediaType("M");
+    }
+  }, [movie.movie_id, movie.media_type]);
 
   if (!user) {
     console.error("User is not authenticated");
@@ -65,7 +71,7 @@ export default function MovieCard({
   };
 
   return (
-    <div className="bg-base-100 shadow-xl flex p-4 gap-2 rounded-md">
+    <div className="bg-base-100 shadow-xl flex p-4 gap-2 rounded-md relative">
       <Image
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
@@ -73,6 +79,9 @@ export default function MovieCard({
         height={112}
         className="flex-shrink-0 self-start"
       />
+      <span className="absolute top-2 left-2 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+        {mediaType}
+      </span>
       <div>
         <h2 className="text-md font-bold">{movie.title}</h2>
         <p className="text-text-muted">
