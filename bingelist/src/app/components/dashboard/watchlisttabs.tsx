@@ -169,7 +169,7 @@ export default function WatchListTabs() {
                 )}
               </>
             ) : (
-              <ul className="flex flex-col gap-2">
+              <ul className="flex flex-col gap-2 pb-10">
                 {selectedMovies.map((movie) => (
                   <li key={movie.movie_id} className="bg-bg-light rounded-md">
                     <MovieCard

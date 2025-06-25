@@ -11,7 +11,7 @@ export default async function CatalogPage() {
 
   return (
     <ClientLayout header="Catalog">
-      <div className="pb-24">
+      <div className="pb-10">
         <div className="my-4">
           <SearchInput />
         </div>
