@@ -5,14 +5,12 @@ import { fetchTMDB } from "@/lib/tmdb";
 type MovieDetailsProps = {
   params: {
     id: string;
-    mediaType: "movie" | "tv";
+    mediaType: string;
   };
 };
 
 export default async function MovieDetailsPage({ params }: MovieDetailsProps) {
-  console.log("Fetching movie details for:", params.mediaType, params.id);
   const movie = await fetchTMDB(`${params.mediaType}/${params.id}`);
-  console.log("Fetched movie details:", movie);
 
   return (
     <ClientLayout>
