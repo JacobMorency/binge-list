@@ -1,15 +1,15 @@
 "use client";
 import MovieCard from "@/app/components/catalog/moviecard";
-import type { MovieResult } from "@/types/movie";
+import type { MediaResult } from "@/types/movie";
 import { useEffect, useState } from "react";
 
 type MovieRowProps = {
   header: string;
-  movies: MovieResult[];
+  movies: MediaResult[];
 };
 
 export default function MovieRow({ header, movies }: MovieRowProps) {
-  const [moviesList, setMoviesList] = useState<MovieResult[]>([]);
+  const [moviesList, setMoviesList] = useState<MediaResult[]>([]);
 
   useEffect(() => {
     setMoviesList(movies);

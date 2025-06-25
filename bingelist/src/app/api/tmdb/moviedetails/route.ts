@@ -3,6 +3,14 @@ import { fetchTMDB } from "@/lib/tmdb";
 
 export async function GET(req: NextRequest) {
   const movieId = req.nextUrl.searchParams.get("movieId");
+  const mediaType = req.nextUrl.searchParams.get("mediaType");
+
+  if (!mediaType) {
+    return NextResponse.json(
+      { error: "Media type is required" },
+      { status: 400 }
+    );
+  }
 
   if (!movieId) {
     return NextResponse.json(
@@ -12,7 +20,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const data = await fetchTMDB(`movie/${movieId}`);
+    const data = await fetchTMDB(`${mediaType}/${movieId}`);
     if (!data) {
       return NextResponse.json({ error: "Movie not found" }, { status: 404 });
     }

@@ -1,6 +1,6 @@
 export type Movie = {
   page: number;
-  results: MovieResult[];
+  results: MediaResult[];
 };
 
 export type SupabaseMovie = {
@@ -8,25 +8,30 @@ export type SupabaseMovie = {
   title: string;
   poster_path?: string;
   release_date?: string;
+  media_type: string;
+  user_id: string;
 };
 
-export type MovieResult = {
-  adult: boolean;
-  backdrop_path: string;
+export type MediaType = "movie" | "tv";
+
+export type MediaResult = {
   id: number;
-  title: string;
-  original_language: string;
-  original_title: string;
+  media_type: MediaType;
+  poster_path: string | null;
   overview: string;
-  poster_path: string;
-  media_type: string;
-  genre_ids: number[];
-  popularity: number;
-  release_date: string;
-  video: boolean;
   vote_average: number;
-  vote_count: number;
-};
+} & (
+  | {
+      media_type: "movie";
+      title: string;
+      release_date: string;
+    }
+  | {
+      media_type: "tv";
+      name: string;
+      first_air_date: string;
+    }
+);
 
 export type MovieDetails = {
   adult: boolean;

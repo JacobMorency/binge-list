@@ -1,4 +1,4 @@
-import { MovieResult } from "@/types/movie";
+import { MediaResult } from "@/types/movie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { IoAdd, IoTimeOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
@@ -6,7 +6,7 @@ import supabase from "@/app/lib/supabaseClient";
 import { useAuth } from "@/app/context/authContext";
 
 type MovieCardProps = {
-  movie: MovieResult;
+  movie: MediaResult;
 };
 
 export default function MovieCard({ movie }: MovieCardProps) {
@@ -14,7 +14,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
   const { user } = useAuth();
 
   const handleMovieClick = () => {
-    router.push(`/moviedetails/${movie.id}`);
+    router.push(`/moviedetails/${movie.media_type}/${movie.id}`);
   };
 
   const addToWatchlist = async (): Promise<void> => {
