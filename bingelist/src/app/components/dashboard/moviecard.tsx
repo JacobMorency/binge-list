@@ -3,7 +3,9 @@ import Image from "next/image";
 import Button from "@/app/components/ui/button";
 import supabase from "@/app/lib/supabaseClient";
 import { useAuth } from "@/app/context/authContext";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoStar } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { MovieDetails } from "@/types/movie";
 
 type MovieCardProps = {
   movie: SupabaseMovie;
@@ -12,6 +14,29 @@ type MovieCardProps = {
 
 export default function MovieCard({ movie, selectedTab }: MovieCardProps) {
   const { user } = useAuth();
+  const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
+
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      const res = await fetch(
+        `/api/tmdb/moviedetails?movieId=${movie.movie_id}`
+      );
+      if (!res.ok) {
+        console.error("Failed to fetch movie details:", res.statusText);
+        return;
+      }
+      const data: MovieDetails = await res.json();
+      if (!data) {
+        console.error("No movie details found for ID:", movie.movie_id);
+        return;
+      }
+      console.log("Fetched movie details:", data);
+      setMovieDetails(data);
+    };
+
+    fetchMovieDetails();
+  }, [movie.movie_id]);
+
   if (!user) {
     console.error("User is not authenticated");
     return null;
@@ -44,8 +69,16 @@ export default function MovieCard({ movie, selectedTab }: MovieCardProps) {
       />
       <div>
         <h2 className="text-md font-bold">{movie.title}</h2>
-        <p>Year - Genre </p>
-        <p>Rating</p>
+        <p className="text-text-muted">
+          {movieDetails?.release_date?.split("-")[0]} -{" "}
+          {movieDetails?.genres
+            .slice(0, 2)
+            .map((genre) => genre.name)
+            .join(", ")}
+        </p>
+        <p className="flex items-center gap-1 text-sm">
+          <IoStar fill="gold" /> {movieDetails?.vote_average.toFixed(2)}
+        </p>
         <Button className="mt-3 flex items-center gap-2" onClick={removeMovie}>
           <IoClose size={18} />
           <span>Remove</span>
