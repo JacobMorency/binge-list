@@ -3,6 +3,7 @@ import Image from "next/image";
 import Button from "@/app/components/ui/button";
 import supabase from "@/app/lib/supabaseClient";
 import { useAuth } from "@/app/context/authContext";
+import { IoClose } from "react-icons/io5";
 
 type MovieCardProps = {
   movie: SupabaseMovie;
@@ -39,12 +40,16 @@ export default function MovieCard({ movie, selectedTab }: MovieCardProps) {
         alt={movie.title}
         width={75}
         height={112}
+        className="flex-shrink-0 self-start"
       />
       <div>
         <h2 className="text-md font-bold">{movie.title}</h2>
         <p>Year - Genre </p>
         <p>Rating</p>
-        <Button onClick={removeMovie}>Remove</Button>
+        <Button className="mt-3 flex items-center gap-2" onClick={removeMovie}>
+          <IoClose size={18} />
+          <span>Remove</span>
+        </Button>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const ClientLayout = ({ children, header }: ClientLayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       {header && (
-        <header className="bg-base-200 p-4 text-center">
+        <header className="bg-bg p-4 text-center">
           <h1 className="text-primary-content text-2xl">{header}</h1>
         </header>
       )}
