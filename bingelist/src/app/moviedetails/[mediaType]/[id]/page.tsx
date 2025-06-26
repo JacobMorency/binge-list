@@ -1,11 +1,17 @@
 import ClientLayout from "@/app/components/clientlayout";
 import Image from "next/image";
 import { fetchTMDB } from "@/lib/tmdb";
-import type { PageProps } from "next";
+
+type MovieDetailsPageProps = {
+  params: {
+    id: string;
+    mediaType: "movie" | "tv";
+  };
+};
 
 export default async function MovieDetailsPage({
   params,
-}: PageProps<{ id: string; mediaType: string }>) {
+}: MovieDetailsPageProps) {
   const movie = await fetchTMDB(`${params.mediaType}/${params.id}`);
 
   return (
