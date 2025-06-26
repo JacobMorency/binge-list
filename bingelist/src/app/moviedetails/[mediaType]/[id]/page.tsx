@@ -5,7 +5,7 @@ import { fetchTMDB } from "@/lib/tmdb";
 type MovieDetailsPageProps = {
   params: {
     id: string;
-    mediaType: "movie" | "tv";
+    mediaType: string;
   };
 };
 
