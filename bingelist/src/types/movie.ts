@@ -66,3 +66,11 @@ export type MovieDetails = {
   vote_average: number;
   vote_count: number;
 };
+
+export type CrewMember = {
+  id: number;
+  name: string;
+  job: string;
+  department: string;
+  profile_path: string | null;
+};
