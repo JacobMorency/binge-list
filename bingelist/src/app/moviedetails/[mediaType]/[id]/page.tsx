@@ -10,6 +10,7 @@ import {
 import Button from "@/app/components/ui/button";
 import { CrewMember } from "@/types/movie";
 import CastMember from "@/app/components/moviedetails/castmember";
+import BackButton from "@/app/components/moviedetails/backbutton";
 
 type Params = Promise<{
   id: string;
@@ -41,10 +42,7 @@ export default async function MovieDetailsPage({ params }: { params: Params }) {
       >
         {/* Top bar */}
         <div className="flex items-center gap-2 mb-24">
-          <Button className="flex items-center gap-2">
-            <IoClose size={20} />
-            Back
-          </Button>
+          <BackButton />
         </div>
 
         {/* Poster and info */}
@@ -77,10 +75,10 @@ export default async function MovieDetailsPage({ params }: { params: Params }) {
 
         {/* Action buttons */}
         <div className="flex gap-2 my-8 w-full justify-between">
-          <button className="flex-1 flex items-center justify-center gap-2 px-2 font-bold py-2 bg-primary text-text rounded-md whitespace-nowrap">
+          <button className="flex-1 flex items-center justify-center gap-2 px-4 font-bold py-2 bg-primary text-text rounded-md whitespace-nowrap">
             <IoAdd size={20} /> Add to Watchlist
           </button>
-          <button className="flex-1 flex items-center justify-center gap-2 px-2 font-bold py-2 bg-primary text-text rounded-md">
+          <button className="flex-1 flex items-center justify-center gap-2 px-4 font-bold py-2 bg-primary text-text rounded-md">
             <IoTimeOutline size={20} /> Watched
           </button>
           <button className="flex-1 flex items-center justify-center gap-2 px-2 font-bold py-2 bg-primary text-text rounded-md">
