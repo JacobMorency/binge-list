@@ -20,24 +20,16 @@ type Params = Promise<{
 export default async function MovieDetailsPage({ params }: { params: Params }) {
   const { id, mediaType } = await params;
   const movie = await fetchTMDB(`${mediaType}/${id}`);
-  const posters = await fetchTMDB(`${mediaType}/${id}/images`);
   const credits: { cast: CrewMember[]; crew: CrewMember[] } = await fetchTMDB(
     `${mediaType}/${id}/credits`
   );
 
-  const randomPoster =
-    posters.posters.length > 0
-      ? posters.posters[Math.floor(Math.random() * posters.posters.length)]
-      : { file_path: movie.poster_path };
-
-  console.log("Random Poster:", randomPoster);
-
   return (
     <main>
       <div
-        className="w-full h-[400px] flex flex-col p-4"
+        className="w-full h-[400px] flex flex-col p-4 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgb(0, 0, 0, 0.4) , var(--color-bg-dark)), url(https://image.tmdb.org/t/p/w500${randomPoster.file_path})`,
+          backgroundImage: `linear-gradient(to bottom, rgb(0, 0, 0, 0.4) , var(--color-bg-dark)), url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`,
         }}
       >
         {/* Top bar */}
@@ -104,7 +96,9 @@ export default async function MovieDetailsPage({ params }: { params: Params }) {
             <span>
               <p className="font-semibold">Runtime</p>
               <p className="text-text-muted">
-                {movie.runtime || "No runtime available"} minutes
+                {movie.runtime
+                  ? `${movie.runtime} minutes`
+                  : "No runtime available"}
               </p>
             </span>
           </div>
