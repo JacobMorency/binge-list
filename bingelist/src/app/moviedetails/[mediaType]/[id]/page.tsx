@@ -1,13 +1,6 @@
 import Image from "next/image";
 import { fetchTMDB } from "@/lib/tmdb";
-import {
-  IoClose,
-  IoStar,
-  IoAdd,
-  IoTimeOutline,
-  IoHeartOutline,
-} from "react-icons/io5";
-import Button from "@/app/components/ui/button";
+import { IoStar, IoAdd, IoTimeOutline, IoHeartOutline } from "react-icons/io5";
 import { CrewMember } from "@/types/movie";
 import CastMember from "@/app/components/moviedetails/castmember";
 import BackButton from "@/app/components/moviedetails/backbutton";

@@ -12,7 +12,7 @@ export default function MovieRow({ header, movies }: MovieRowProps) {
   const [moviesList, setMoviesList] = useState<MediaResult[]>([]);
 
   useEffect(() => {
-    setMoviesList(movies);
+    setMoviesList(Array.isArray(movies) ? movies : []);
   }, [movies]);
 
   return (
