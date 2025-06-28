@@ -1,9 +1,9 @@
 import supabase from "@/app/lib/supabaseClient";
-import { MovieDetails, TVDetails } from "@/types/movie";
+import { MovieDetails, TVDetails, MediaResult } from "@/types/movie";
 
 export async function addMovieToList(
   userId: string,
-  movie: MovieDetails | TVDetails,
+  movie: MovieDetails | TVDetails | MediaResult,
   mediaType: string,
   tableName: string
 ): Promise<void> {
