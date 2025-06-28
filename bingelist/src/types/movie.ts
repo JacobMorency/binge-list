@@ -67,6 +67,50 @@ export type MovieDetails = {
   vote_count: number;
 };
 
+export type TVDetails = {
+  backdrop_path: string;
+  created_by: { id: number; name: string; profile_path: string | null }[];
+  episode_run_time: number[];
+  first_air_date: string;
+  genres: { id: number; name: string }[];
+  homepage: string;
+  id: number;
+  in_production: boolean;
+  languages: string[];
+  last_air_date: string;
+  name: string;
+  networks: { id: number; name: string; logo_path: string | null }[];
+  number_of_episodes: number;
+  number_of_seasons: number;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: {
+    id: number;
+    logo_path: string | null;
+    name: string;
+  }[];
+  production_countries: { iso_3166_1: string; name: string }[];
+  seasons: {
+    air_date: string | null;
+    episode_count: number;
+    id: number;
+    name: string;
+    overview: string;
+    poster_path: string | null;
+    season_number: number;
+  }[];
+  spoken_languages: { english_name: string; iso_639_1: string; name: string }[];
+  status: string;
+  tagline: string;
+  type: string;
+  vote_average: number;
+  vote_count: number;
+};
+
 export type CrewMember = {
   id: number;
   name: string;

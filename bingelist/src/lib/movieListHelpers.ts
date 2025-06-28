@@ -1,19 +1,21 @@
 import supabase from "@/app/lib/supabaseClient";
-import { MediaResult } from "@/types/movie";
+import { MovieDetails, TVDetails } from "@/types/movie";
 
 export async function addMovieToList(
   userId: string,
-  movie: MediaResult,
+  movie: MovieDetails | TVDetails,
+  mediaType: string,
   tableName: string
 ): Promise<void> {
   try {
-    const title = movie.media_type === "tv" ? movie.name : movie.title;
-    const releaseDate = new Date(
-      movie.media_type === "tv"
-        ? movie.first_air_date
-        : movie.release_date || ""
-    );
+    console.log();
+    const title = "title" in movie ? movie.title : movie.name;
 
+    const releaseDate = new Date(
+      "release_date" in movie ? movie.release_date : movie.first_air_date
+    )
+      .toISOString()
+      .split("T")[0];
     const { error } = await supabase.from(tableName).insert([
       {
         user_id: userId,
@@ -21,7 +23,7 @@ export async function addMovieToList(
         title,
         poster_path: movie.poster_path,
         release_date: releaseDate,
-        media_type: movie.media_type,
+        media_type: mediaType,
       },
     ]);
 
