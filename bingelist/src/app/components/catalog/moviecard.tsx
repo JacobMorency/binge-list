@@ -71,7 +71,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
       removeMovieFromList(user.id, movie.id, "movies_to_watch");
       setIsInWatchlist(false);
     } else {
-      addMovieToList(user.id, movie, "movies_to_watch");
+      addMovieToList(user.id, movie, movie.media_type, "movies_to_watch");
       setIsInWatchlist(true);
     }
   };
@@ -85,7 +85,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
       removeMovieFromList(user.id, movie.id, "watched_movies");
       setIsWatched(false);
     } else {
-      addMovieToList(user.id, movie, "watched_movies");
+      addMovieToList(user.id, movie, movie.media_type, "watched_movies");
       setIsWatched(true);
     }
   };
@@ -100,7 +100,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
       removeMovieFromList(user.id, movie.id, "favorite_movies");
       setIsFavorite(false);
     } else {
-      addMovieToList(user.id, movie, "favorite_movies");
+      addMovieToList(user.id, movie, movie.media_type, "favorite_movies");
       setIsFavorite(true);
     }
   };
