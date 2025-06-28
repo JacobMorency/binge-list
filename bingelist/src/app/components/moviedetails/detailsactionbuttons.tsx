@@ -6,11 +6,6 @@ import {
   IoHeart,
   IoTime,
 } from "react-icons/io5";
-import {
-  addMovieToList,
-  removeMovieFromList,
-  checkMovieInList,
-} from "@/lib/movieListHelpers";
 
 type DetailsActionButtonsProps = {
   movieId: string;
