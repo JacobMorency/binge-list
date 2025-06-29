@@ -11,8 +11,8 @@ export default function SearchInput() {
   const [results, setResults] = useState<MediaResult[]>([]);
 
   const router = useRouter();
-  const handleMovieClick = (movieId: number) => {
-    router.push(`/moviedetails/${movieId}`);
+  const handleMovieClick = (movieId: number, mediaType: string) => {
+    router.push(`/moviedetails/${mediaType}/${movieId}`);
   };
   const debouncedSearch = useMemo(
     () =>
@@ -57,7 +57,9 @@ export default function SearchInput() {
                   <>
                     <MovieSearchRow
                       movie={result}
-                      onClick={() => handleMovieClick(result.id)}
+                      onClick={() =>
+                        handleMovieClick(result.id, result.media_type)
+                      }
                     />
                     <hr className="my-2 border-neutral-600" />
                   </>
