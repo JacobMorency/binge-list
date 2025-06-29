@@ -7,6 +7,7 @@ import { IoClose, IoStar } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { MediaResult } from "@/types/movie";
 import Loading from "@/app/components/ui/loading";
+import { useRouter } from "next/navigation";
 
 type MovieCardProps = {
   movie: SupabaseMovie;
@@ -22,6 +23,12 @@ export default function MovieCard({
   const { user } = useAuth();
   const [movieDetails, setMovieDetails] = useState<MediaResult | null>(null);
   const [mediaType, setMediaType] = useState<string>("");
+
+  const router = useRouter();
+
+  const handleMovieClick = () => {
+    router.push(`/moviedetails/${movie.media_type}/${movie.movie_id}`);
+  };
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -76,19 +83,25 @@ export default function MovieCard({
   }
 
   return (
-    <div className="bg-base-100 shadow-xl flex p-4 gap-2 rounded-md relative">
+    <div className=" shadow-xl flex p-4 gap-2 rounded-md relative bg-bg-light">
       <Image
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
         width={75}
         height={112}
         className="flex-shrink-0 self-start"
+        onClick={handleMovieClick}
       />
       <span className="absolute top-2 left-2 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
         {mediaType}
       </span>
       <div>
-        <h2 className="text-md font-bold">{movie.title}</h2>
+        <a
+          href={`/moviedetails/${movie.media_type}/${movie.movie_id}`}
+          className="text-lg font-bold"
+        >
+          {movie.title}
+        </a>
         <p className="text-text-muted">
           {movie.release_date?.slice(0, 4)} •{" "}
           {movieDetails.genres
