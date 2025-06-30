@@ -11,6 +11,7 @@ import {
   IoTimeOutline,
 } from "react-icons/io5";
 import Loading from "@/app/components/ui/loading";
+import Skeleton from "@/app/components/ui/skeleton";
 
 export default function WatchListTabs() {
   const [selectedTab, setSelectedTab] = useState<string>("movies_to_watch");
@@ -187,9 +188,17 @@ export default function WatchListTabs() {
             )}
           </>
         ) : (
-          <div className="flex items-center justify-center h-64">
-            <Loading />
-          </div>
+          <ul className="flex flex-col gap-2 pb-10">
+            <li>
+              <Skeleton className="w-full bg-bg-light h-32 rounded-md" />
+            </li>
+            <li>
+              <Skeleton className="w-full bg-bg-light h-32 rounded-md" />
+            </li>
+            <li>
+              <Skeleton className="w-full bg-bg-light h-32 rounded-md" />
+            </li>
+          </ul>
         )}
       </div>
     </div>
