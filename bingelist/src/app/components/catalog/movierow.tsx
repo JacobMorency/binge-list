@@ -2,7 +2,6 @@
 import MovieCard from "@/app/components/catalog/moviecard";
 import type { MediaResult } from "@/types/movie";
 import { useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 type MovieRowProps = {
   header: string;
