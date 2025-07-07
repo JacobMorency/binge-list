@@ -10,8 +10,8 @@ import {
   IoHeartOutline,
   IoTimeOutline,
 } from "react-icons/io5";
-import Loading from "@/app/components/ui/loading";
 import Skeleton from "@/app/components/ui/skeleton";
+import Loading from "@/app/components/ui/loading";
 
 export default function WatchListTabs() {
   const [selectedTab, setSelectedTab] = useState<string>("movies_to_watch");
@@ -113,6 +113,11 @@ export default function WatchListTabs() {
       selectedTab === tab ? "bg-primary text-primary-content" : ""
     }`;
   };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="">
       <nav role="tablist" className="flex bg-bg-light p-1 rounded-md my-4">

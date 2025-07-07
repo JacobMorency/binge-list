@@ -79,7 +79,7 @@ export default function MovieCard({
   };
 
   if (!movieDetails) {
-    return <Loading />;
+    return;
   }
 
   return (
