@@ -1,7 +1,4 @@
-import { House } from "lucide-react";
 import {
-  IoHomeOutline,
-  IoHome,
   IoPerson,
   IoPersonOutline,
   IoSearch,
@@ -16,7 +13,7 @@ export default function BottomNav() {
   const router = useRouter();
   const isActive = (path: string) => pathname === path;
   return (
-    <footer className="p-4 bg-base-200 text-primary-content fixed bottom-0 left-0 right-0 pb-6">
+    <footer className="p-4 bg-bg text-primary-content fixed bottom-0 left-0 right-0 pb-6">
       <div className="flex justify-around items-center">
         <button onClick={() => router.push("/dashboard")}>
           {isActive("/dashboard") ? (
