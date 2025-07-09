@@ -6,7 +6,6 @@ import { useAuth } from "@/app/context/authContext";
 import { IoClose, IoStar } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { MediaResult } from "@/types/movie";
-import Loading from "@/app/components/ui/loading";
 import { useRouter } from "next/navigation";
 
 type MovieCardProps = {
